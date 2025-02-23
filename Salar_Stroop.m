@@ -23,6 +23,12 @@ W = rect(3); H = rect(4);
 font = struct('size', round(W/27), 'name', 'Times');
 Screen('TextFont', wPtr, font.name);
 Screen('TextSize', wPtr, font.size);
+side=0.4*W;
+a=H/100;
+b=H/10;
+crossA=[W/2-a/2,H/2-b/2,W/2+a/2,H/2+b/2];
+crossB=[W/2-b/2,H/2-a/2,W/2+b/2,H/2+a/2];
+centerCoord=[W/2-side/2,H/2-side/2,W/2+side/2,H/2+side/2];
 
 RestrictKeysForKbCheck([KbName('r'), KbName('g'), KbName('b'), KbName('y')]);
 
@@ -55,7 +61,16 @@ for i = 1:nTrial
         DrawFormattedText(wPtr, TextMessages{2}, 'center', 'center', [255,255,255]);
     end
     Screen('Flip', wPtr);
-    WaitSecs(0.5); % Pause before next trial
+    WaitSecs(0.5); 
+    %fixationCross
+    Screen('FillRect',wPtr,[0 0 0],crossA);
+    Screen('FillRect',wPtr,[0 0 0],crossB);
+    Screen('Flip',wPtr);
+    WaitSecs(0.3);
+
+    
+    % Screen('Flip', wPtr);
+    
 end
 
 sca;
